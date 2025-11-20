@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCADIA - Global Solution 2025</title>
+     <style>
+      :root {
+          --bg-color: #05070a;
+          --card-bg: #121620;
+          --primary-neon: #00f0ff; 
+          --secondary-neon: #9d00ff;
+          --text-color: #e0e6ed;
+          --text-muted: #a0aab5;
+          --font-main: 'Roboto', sans-serif;
+          --font-tech: 'Orbitron', sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        background-color: transparent;
+        width: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--text-color);
+        border-radius: 1000px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--primary-neon);
+        cursor: pointer;
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          transition: all 0.2s ease-in-out;
+          scroll-behavior: smooth;
+      }
+
+      body {
+          font-family: var(--font-main);
+          background-color: var(--bg-color);
+          color: var(--text-color);
+          line-height: 1.6;
+          overflow-x: hidden;
+          scroll-behavior: smooth;
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
+
+      h1, h2, h3, h4 {
+          font-family: var(--font-tech);
+          color: #fff;
+          margin-bottom: 15px;
+      }
+
+      h2 {
+          font-size: 2rem;
+          border-bottom: 2px solid var(--primary-neon);
+          display: inline-block;
+          margin-bottom: 30px;
+          padding-bottom: 5px;
+      }
+
+      header {
+          background: rgba(5, 7, 10, 0.95);
+          backdrop-filter: blur(10px);
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 1000;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 70px;
+      }
+
+      .logo {
+          font-family: var(--font-tech);
+          font-size: 1.5rem;
+          color: var(--primary-neon);
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+      }
+
+      nav ul {
+          list-style: none;
+          display: flex;
+          gap: 20px;
+      }
+
+      nav a {
+          text-decoration: none;
+          color: #fff;
+          font-weight: 500;
+          transition: color 0.3s;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+      }
+
+      nav a:hover {
+          color: var(--primary-neon);
+      }
+
+      .hero {
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          position: relative;
+          background: radial-gradient(circle at center, #1a0b2e 0%, var(--bg-color) 80%);
+          padding-top: 70px;
+      }
+
+      .hero h1 {
+          font-size: 3.5rem;
+          text-shadow: 0 0 15px var(--secondary-neon);
+          margin-bottom: 15px;
+          line-height: 1.2;
+      }
+
+      .subtitle {
+          color: var(--primary-neon);
+          letter-spacing: 4px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          font-family: var(--font-tech);
+      }
+
+      .hero-desc {
+          font-size: 1.2rem;
+          max-width: 700px;
+          margin: 0 auto 30px;
+          color: var(--text-muted);
+      }
+
+      .btn {
+          display: inline-block;
+          padding: 12px 30px;
+          background: transparent;
+          border: 2px solid var(--primary-neon);
+          color: var(--primary-neon);
+          text-decoration: none;
+          font-family: var(--font-tech);
+          font-weight: bold;
+          transition: 0.3s;
+          border-radius: 4px;
+          text-transform: uppercase;
+      }
+
+      .btn:hover {
+          background: var(--primary-neon);
+          color: #000;
+          box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+      }
+
+      section {
+          padding: 80px 0;
+      }
+
+      .section-dark {
+          background-color: #0b0f16;
+      }
+
+      .split-layout {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 50px;
+          align-items: center;
+      }
+
+      .split-layout.reverse .text-content {
+          order: 2;
+      }
+
+      .ods-list {
+          list-style: none;
+          margin-top: 20px;
+      }
+
+      .ods-list li {
+          margin-bottom: 10px;
+          padding-left: 15px;
+          border-left: 3px solid var(--secondary-neon);
+      }
+
+      .image-placeholder {
+          background: #1a1f2b;
+          height: 350px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px;
+          border: 1px dashed var(--text-muted);
+          color: var(--text-muted);
+          position: relative;
+          overflow: hidden;
+          font-family: monospace;
+
+          & img {
+            height: 140%;
+            width: 100%;
+          }
+      }
+
+      .neon-border {
+          border: 2px solid var(--secondary-neon);
+          box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
+          border-style: solid;
+      }
+
+      .grid-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+      }
+
+      .card {
+          background: var(--card-bg);
+          padding: 30px;
+          border-radius: 10px;
+          border-top: 4px solid var(--primary-neon);
+          transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      }
+
+      .section-tech {
+          background: linear-gradient(to bottom, var(--bg-color), #0d111a);
+          border-top: 1px solid #1a1f2b;
+      }
+
+      .spec-box {
+          background: rgba(0, 240, 255, 0.03);
+          border: 1px solid rgba(0, 240, 255, 0.2);
+          padding: 25px;
+          margin-bottom: 50px;
+          border-radius: 8px;
+      }
+
+      .spec-box ul {
+          list-style: none;
+      }
+
+      .spec-box li {
+          margin-bottom: 12px;
+          font-family: monospace;
+          font-size: 1.05rem;
+      }
+
+      .spec-box span {
+          color: var(--primary-neon);
+          font-weight: bold;
+      }
+
+      .topology-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 25px;
+      }
+
+      .device {
+          text-align: center;
+          background: var(--card-bg);
+          padding: 25px;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          transition: 0.3s;
+      }
+
+      .device:hover {
+          border-color: var(--secondary-neon);
+      }
+
+      .device h4 {
+          color: var(--primary-neon);
+          font-size: 1.1rem;
+      }
+
+      .device p {
+          font-size: 0.9rem;
+          color: var(--text-muted);
+      }
+
+      .team-grid {
+          display: flex;
+          justify-content: center;
+          gap: 40px;
+          flex-wrap: wrap;
+      }
+
+      .member {
+          text-align: center;
+          background: #0f131c;
+          padding: 20px;
+          border-radius: 10px;
+          min-width: 200px;
+          border: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .avatar {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: linear-gradient(45deg, #333, #111);
+          margin: 0 auto 15px;
+          border: 2px solid var(--secondary-neon);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          font-weight: bold;
+          color: #fff;
+          font-family: var(--font-tech);
+      }
+
+      .rm {
+          color: var(--primary-neon);
+          font-family: monospace;
+          margin-top: 5px;
+      }
+
+      footer {
+          background: #000;
+          padding: 30px 0;
+          text-align: center;
+          color: #555;
+          font-size: 0.85rem;
+          border-top: 1px solid #111;
+      }
+
+      @media (max-width: 768px) {
+          .hero h1 {
+              font-size: 2.2rem;
+          }
+          
+          .split-layout {
+              grid-template-columns: 1fr;
+              gap: 30px;
+          }
+          
+          .split-layout.reverse .text-content {
+              order: 0;
+          }
+          
+          nav ul {
+              display: none;
+          }
+          
+          .nav-container {
+              justify-content: center;
+          }
+      }
+     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">ARCADIA</div>
+            <nav>
+                <ul>
+                    <li><a href="#missao">Missão</a></li>
+                    <li><a href="#areas">Áreas de Foco</a></li>
+                    <li><a href="#network">Infraestrutura</a></li>
+                    <li><a href="#team">Integrantes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <p class="subtitle">GLOBAL SOLUTION 2025</p>
+            <h1>O FUTURO DO TRABALHO</h1>
+            <p class="hero-desc">Reimaginando a capacitação profissional através da inovação, inclusão e inteligência artificial.</p>
+            <a href="#missao" class="btn">Conhecer Solução</a>
+        </div>
+        <div class="hero-bg"></div> 
+    </section>
+
+    <section id="missao" class="section-dark">
+        <div class="container split-layout">
+            <div class="text-content">
+                <h2>Nossa Missão</h2>
+                <p>Em um cenário de automação e transformações rápidas, a Arcadia não vê a tecnologia como ameaça, mas como parceira. Nossa solução utiliza IA para personalizar o <strong>Reskilling e Upskilling</strong> de profissionais.</p>
+                <p>Estamos alinhados aos Objetivos de Desenvolvimento Sustentável da ONU:</p>
+                <ul class="ods-list">
+                    <li><strong>ODS 4:</strong> Educação de Qualidade</li>
+                    <li><strong>ODS 8:</strong> Trabalho Decente e Crescimento</li>
+                    <li><strong>ODS 9:</strong> Indústria e Inovação</li>
+                    <li><strong>ODS 10:</strong> Redução das Desigualdades</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">
+                <img src="https://media.discordapp.net/attachments/1121210969352310966/1441157850876608604/ABS2GSnpFAio2Cb5gIaWuzTiGkV75jqoQC-2Z-Kp8DjsMOesNcGSJFcknhxOyqqfwzQD8I0_ZD0Tz0J-UDSO2TKcDymksGlJJ2BMXC_kOa3wQwf2WSBMvcFWEw60fzfFj-IPYk2a60Z2bBXRxVqz7mOKxnLEOJ7itGlnaw6CD8JiFXwcuIJG6Qs1024-rj.png?ex=6920c657&is=691f74d7&hm=0d0879ae1fff32566be61b6fe8f7011470730ae542eb8f9cccc5205be604487d&=&format=webp&quality=lossless"/>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="section-cards">
+        <div class="container">
+            <h2>Pilares da Solução</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>Qualificação (Reskilling)</h3>
+                    <p>Sistemas de aprendizado adaptativo que identificam lacunas de competência e sugerem trilhas personalizadas para adaptação às novas demandas do mercado.</p>
+                </div>
+                <div class="card">
+                    <h3>Bem-Estar Digital</h3>
+                    <p>Ferramentas integradas para monitorar a saúde mental e ajudar no equilíbrio entre vida pessoal e profissional em regimes híbridos.</p>
+                </div>
+                <div class="card">
+                    <h3>Inclusão Produtiva</h3>
+                    <p>Algoritmos de recrutamento ético que eliminam vieses e conectam talentos diversos a oportunidades globais de trabalho.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="network" class="section-tech">
+        <div class="container">
+            <h2>Arquitetura de Rede</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Infraestrutura robusta projetada para suportar a plataforma Arcadia com segurança e alta disponibilidade.</p>
+            
+            <div class="tech-specs">
+                <div class="spec-box">
+                    <h3>Configurações Técnicas</h3>
+                    <ul>
+                        <li><strong>Máscara de Rede:</strong> 255.255.255.0 (CIDR /24) - Suporta até 254 hosts.</li>
+                        <li><strong>Servidor DNS:</strong> 192.168.77.10 (Resolve: www.arcadia.com.br)</li>
+                        <li><strong>Segurança:</strong> Utilização de <span>SSH</span> (Secure Shell) em substituição ao Telnet para criptografia de dados de gestão.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="topology-grid">
+                <div class="device">
+                    <h4>Router 1941</h4>
+                    <p>Responsável pelo roteamento entre a rede interna e externa, gerenciando o tráfego de saída.</p>
+                </div>
+                <div class="device">
+                    <h4>Switch 2960</h4>
+                    <p>Centraliza a conexão entre os computadores (Aprendiz A, B, C), o servidor e o roteador.</p>
+                </div>
+                <div class="device">
+                    <h4>Servidor (Server-PT)</h4>
+                    <p>Hospeda os serviços críticos: DNS (Resolução de Nomes), HTTP (Web) e FTP (Arquivos).</p>
+                </div>
+                <div class="device">
+                    <h4>Estações de Trabalho</h4>
+                    <p>PCs Aprendiz A, B e C configurados para consumir os serviços da plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="modeling" class="section-dark">
+        <div class="container split-layout reverse">
+            <div class="text-content">
+                <h2>O Ambiente de Aprendizado</h2>
+                <p>Visualização 3D do espaço ideal para o trabalhador do futuro: um ambiente que mescla conforto doméstico com ergonomia profissional, essencial para o aprendizado contínuo (Life-long learning).</p>
+            </div>
+            <div class="image-placeholder neon-border">
+                <img src="https://media.discordapp.net/attachments/1121210969352310966/1441158648654069920/6ee21869-5168-4cc4-b975-c62c3f428024.png?ex=6920c715&is=691f7595&hm=2eec6d4919eb27b0aef9c37dbc1005c686a6ad2558aa38bb20873da7b09b804f&=&format=webp&quality=lossless">
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="section-team">
+        <div class="container">
+            <h2>Integrantes do Grupo</h2>
+            <div class="team-grid">
+                <div class="member">
+                    <div class="avatar">E</div>
+                    <p><strong>Evandro Yuji K. de Oliveira</strong></p>
+                    <p class="rm">RM: 559274</p>
+                </div>
+                <div class="member">
+                    <div class="avatar">G</div>
+                    <p><strong>Guilherme Rodrigues Leite</strong></p>
+                    <p class="rm">RM: 560131</p>
+                </div>
+                <div class="member">
+                    <div class="avatar">P</div>
+                    <p><strong>Pedro Henrique B. Bergamin</strong></p>
+                    <p class="rm">RM: 559443</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ARCADIA - Global Solution. FIAP Engenharia de Software.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
